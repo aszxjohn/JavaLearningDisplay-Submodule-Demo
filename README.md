@@ -5,7 +5,7 @@ Java Learning Display
 自主練習展示
 此專案目標是將自己有興趣的東西以模組化的方式撰寫出來。
 並盡可能的去研究多人合作開發的話要怎麼讓工作更順利。
-Version : 0.2.0
+Version : 0.3.0
 last updated date : 2024/03/12
 
 
