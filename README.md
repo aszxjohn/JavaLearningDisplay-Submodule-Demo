@@ -10,8 +10,8 @@ last updated date : 2024/03/12
 
 
 主要目標:
-1. 專案以multi-module的方式建置、Common與ORM要能被多個專案引用 (以完成)
-2. 專案要能支援git submodule 功能 (製作中)
+1. 專案以multi-module的方式建置、Common與ORM要能被多個專案引用 (已完成)
+2. 專案要能支援git submodule 功能 (已完成)
 
 
 功能列表:
