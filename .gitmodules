@@ -1,0 +1,9 @@
+[submodule "common"]
+	path = common
+	url = https://github.com/aszxjohn/common-Submodule-Demo.git
+[submodule "orm"]
+	path = orm
+	url = https://github.com/aszxjohn/orm-Submodule-Demo.git
+[submodule "RegAuthSystem"]
+	path = RegAuthSystem
+	url = https://github.com/aszxjohn/RegAuthSystem-Submodule-Demo.git

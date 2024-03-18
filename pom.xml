@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+        	
+  
+  
+  
+  <modelVersion>4.0.0</modelVersion>
+        	
+  
+  
+  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.3</version>
+    <relativePath/>
+  </parent>
+        	
+
+  <groupId>com.example</groupId>
+  <artifactId>demo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>demo</name>
+  <description>Demo the various features I've created.</description>
+
+
+  <properties>
+    <spring-security-core.version>5.5.0</spring-security-core.version>
+    <java.version>17</java.version>
+    <common.version>0.0.1-SNAPSHOT</common.version>
+    <orm.version>0.0.1-SNAPSHOT</orm.version>
+    <db.version>8.0.23</db.version>
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+    <druid-spring-boot-starter.version>1.1.23</druid-spring-boot-starter.version>
+    <mapstruct.version>1.4.2.Final</mapstruct.version>
+  </properties>
+        	
+
+  <dependencies>
+        	  
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+                		
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+                
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-commons</artifactId>  
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+	<!-- Mysql 數據庫驅動 -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${db.version}</version>
+	</dependency>
+	<!-- druid 連接池 -->
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid-spring-boot-starter</artifactId>
+		<version>${druid-spring-boot-starter.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-configuration-processor</artifactId>
+		<optional>true</optional>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
+	
+	<!-- Spring Security -->	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-core</artifactId>
+	    <version>${spring-security-core.version}</version> 
+	</dependency>
+	
+	 <dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-validation</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.mapstruct</groupId>
+		<artifactId>mapstruct</artifactId>
+		<version>${mapstruct.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mapstruct</groupId>
+		<artifactId>mapstruct-processor</artifactId>
+		<version>${mapstruct.version}</version>
+		<scope>provided</scope>
+	</dependency>
+
+  </dependencies>
+      
+      
+      
+  
+  <dependencyManagement>
+    <dependencies>
+      <!--common-->
+      <dependency>
+        <groupId>com.example</groupId>
+        <artifactId>common</artifactId>
+        <version>${common.version}</version>
+      </dependency>
+            
+            
+      <!--orm-->
+      <dependency>
+        <groupId>com.example</groupId>
+        <artifactId>orm</artifactId>
+        <version>${orm.version}</version>
+      </dependency>
+    
+    
+    <dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>${commons-lang3.version}</version>
+	</dependency>
+
+    </dependencies>
+  </dependencyManagement>
+      
+
+  
+  
+  <build>
+            	
+    
+    <pluginManagement>
+      <plugins>
+        <plugin>
+
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+
+        </plugin>
+      </plugins>
+    </pluginManagement>
+        		
+    <plugins>
+    </plugins>
+          
+  
+  </build>
+        
+  
+  
+  
+  <modules>
+            
+    
+    <module>common</module>
+            
+    
+    <module>orm</module>
+          
+    
+    <module>RegAuthSystem</module>
+      
+  </modules>
+      
+
+
+</project>
