@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: demo
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -53,8 +53,10 @@ CREATE TABLE `client` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `client_number_UNIQUE` (`customer_number`),
   UNIQUE KEY `set_password_verification_code_email_UNIQUE` (`set_password_verification_code_email`),
-  UNIQUE KEY `reset_password_verification_code_email_UNIQUE` (`reset_password_verification_code_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `reset_password_verification_code_email_UNIQUE` (`reset_password_verification_code_email`),
+  UNIQUE KEY `registration_progress_verification_code_UNIQUE` (`registration_progress_verification_code`),
+  UNIQUE KEY `registration_verification_code_UNIQUE` (`registration_verification_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +65,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (28,NULL,NULL,'q2381050@gmail.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,NULL,NULL,'b633b02c-e53f-44a0-9c14-7daaf0ade195','2024-03-19 17:03:59',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-18 17:04:01','2024-03-18 17:04:01');
+INSERT INTO `client` VALUES (35,NULL,NULL,'q2381050@gmail.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,'43d02467-97d6-4b9a-8684-ea654804c6be','2024-03-20 03:04:37','4f3ffac5-7a16-4da4-ae0f-73bb3f5b6951','2024-03-20 03:03:56',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-19 03:02:42','2024-03-19 03:04:37');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +86,7 @@ CREATE TABLE `email_template` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`email_template_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='存放寄信用的信件範本';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='存放寄信用的信件範本';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +95,7 @@ CREATE TABLE `email_template` (
 
 LOCK TABLES `email_template` WRITE;
 /*!40000 ALTER TABLE `email_template` DISABLE KEYS */;
-INSERT INTO `email_template` VALUES (1,'register_user','使用者註冊信件','您好，\r\n \r\n 此電子郵件已由是蔡岳翰的測試系統自動發送，用於進入註冊頁面填寫基本資料。\r\n 請使用下方的連結填寫你的基本資料。\r\n   \r\n   {{URL-Register}}\r\n   \r\n Greeting,\r\n This email has been automatically sent by Chief Telecom and is used to enter the registration page to fill in the basic information.\r\n Please use the link below to fill in your basic information.\r\n \r\n   {{URL-Register}}','system','system','2024-03-14 12:57:09','2024-03-14 12:57:09');
+INSERT INTO `email_template` VALUES (1,'register_user','使用者註冊信件','您好，\r\n \r\n	此電子郵件已由是蔡岳翰的測試系統自動發送，用於進入註冊頁面填寫基本資料。\r\n	請使用下方的連結填寫你的基本資料。\r\n   \r\n	{{register_user}}\r\n   \r\nGreeting,\r\n	This email has been automatically sent by Cai Yuehan\'s test system and is used to enter the registration page and fill in basic information.\r\n	Please use the link below to fill in your basic information.\r\n \r\n	{{register_user}}','system','system','2024-03-14 12:57:09','2024-03-14 12:57:09'),(2,'registration_progress','進度查詢的驗證碼','您好，\r\n \r\n	此電子郵件已由是蔡岳翰的測試系統自動發送，\r\n	您申請查詢註冊進度，請使用下方的連結查看進度。\r\n   \r\n	{{registration_progress}}\r\n   \r\nGreeting,\r\n	This email has been automatically sent by Cai Yuehan\'s test system.\r\n	You have applied to check the registration progress, please use the link below to check the progress.\r\n \r\n	{{registration_progress}}','system','system','2024-03-19 02:27:16','2024-03-19 02:27:16');
 /*!40000 ALTER TABLE `email_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +148,7 @@ CREATE TABLE `system_parameter_setting` (
   `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`setting_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系統參數設定';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系統參數設定';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +157,7 @@ CREATE TABLE `system_parameter_setting` (
 
 LOCK TABLES `system_parameter_setting` WRITE;
 /*!40000 ALTER TABLE `system_parameter_setting` DISABLE KEYS */;
-INSERT INTO `system_parameter_setting` VALUES (1,'email','email_expiration_time','86400','信件的有效期間','system','system','2024-03-14 08:12:52','2024-03-14 08:12:52'),(2,'email','email_sender','Shirai <shiraiforwork@gmail.com>','信件的寄信者','system','system','2024-03-14 13:31:18','2024-03-14 13:31:18'),(3,'email','email_type_register_user','http://127.0.0.1:8080/user/register/','註冊信件裡面附上的 URL，使用會被導向填入個資的頁面','system','system','2024-03-14 14:53:26','2024-03-14 14:53:26');
+INSERT INTO `system_parameter_setting` VALUES (1,'email','email_expiration_time','86400','信件的有效期間','system','system','2024-03-14 08:12:52','2024-03-14 08:12:52'),(2,'email','email_sender','Shirai <shiraiforwork@gmail.com>','信件的寄信者','system','system','2024-03-14 13:31:18','2024-03-14 13:31:18'),(3,'email','email_type_register_user','http://127.0.0.1:8080/user/register/','註冊信件裡面附上的 URL，使用會被導向填入個資的頁面','system','system','2024-03-14 14:53:26','2024-03-14 14:53:26'),(4,'email','email_type_registration_progress','http://127.0.0.1:8080/user/register/check-progress/','註冊進度查詢信件裡面附上的 URL，使用會被導向到進度查詢的頁面','system','system','2024-03-19 02:32:49','2024-03-19 02:32:49');
 /*!40000 ALTER TABLE `system_parameter_setting` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-19  8:47:22
+-- Dump completed on 2024-03-20 18:09:45
