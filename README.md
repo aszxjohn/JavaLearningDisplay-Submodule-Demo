@@ -28,7 +28,7 @@ last updated date : 2024/03/12
 各種Controller > Controller同名Service > Entity同名Service > Repository >Entity
 
 專案引用邏輯
-各種System > orm > common > util工具專案(示意)
+各種System > orm 與 common > util工具專案(示意)
 
 好處是 orm 跟 common可以使用成為各種專案的基底，或同時支援多種專案，
 甚至製作util工具專案成為公司的library被不同的專案使用，也可以支援Git Submodule來增加靈活性
