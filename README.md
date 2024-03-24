@@ -12,7 +12,7 @@ last updated date : 2024/03/12
 主要目標:
 1. 專案以multi-module的方式建置、Common與ORM要能被多個專案引用 (已完成)
 2. 專案要能支援git submodule 功能 (已完成)
-
+3. 追加前端頁面（pending)
 
 功能列表:
 1. 客戶帳號註冊系統、客戶帳號審核系統，專案名稱:RegAuthSystem  ( in progress 以實現功能:帳號註冊、查詢註冊進度)
