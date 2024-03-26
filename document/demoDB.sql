@@ -43,7 +43,7 @@ CREATE TABLE `client` (
   `login_success_date` timestamp NULL DEFAULT NULL COMMENT '最後成功登入時間',
   `login_fail_count` int DEFAULT NULL COMMENT '登入失敗次數記錄',
   `is_lock` bit(1) DEFAULT b'0' COMMENT '帳號是否因為登入失敗次數過多被鎖起來\n預設0:FALSE 沒有被鎖、1:TRUE 有被鎖\n',
-  `is_locked_time` varchar(45) DEFAULT NULL COMMENT '被帳號鎖住的時間',
+  `is_locked_time` timestamp NULL DEFAULT NULL COMMENT '被帳號鎖住的時間',
   `register_review_id` bigint DEFAULT NULL COMMENT '註冊審核紀錄表\n',
   `create_user` varchar(45) NOT NULL DEFAULT 'system',
   `update_user` varchar(45) NOT NULL DEFAULT 'system',
@@ -67,6 +67,38 @@ LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
 INSERT INTO `client` VALUES (35,NULL,NULL,'q2381050@gmail.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,'43d02467-97d6-4b9a-8684-ea654804c6be','2024-03-20 03:04:37','4f3ffac5-7a16-4da4-ae0f-73bb3f5b6951','2024-03-20 03:03:56',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-19 03:02:42','2024-03-19 03:04:37');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `client_info`
+--
+
+DROP TABLE IF EXISTS `client_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `client_info` (
+  `client_info_id` bigint NOT NULL AUTO_INCREMENT,
+  `client_id` bigint DEFAULT NULL,
+  `Identification_number` varchar(45) DEFAULT NULL COMMENT '身分證字號',
+  `client_address` varchar(45) DEFAULT NULL COMMENT '地址',
+  `phone_numbe` varchar(45) DEFAULT NULL COMMENT '手機',
+  `create_user` varchar(45) DEFAULT NULL,
+  `updete_user` varchar(45) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`client_info_id`),
+  KEY `client_id_idx` (`client_id`),
+  CONSTRAINT `client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client_info`
+--
+
+LOCK TABLES `client_info` WRITE;
+/*!40000 ALTER TABLE `client_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `client_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -170,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-20 18:09:45
+-- Dump completed on 2024-03-26 18:34:34
