@@ -24,7 +24,6 @@ DROP TABLE IF EXISTS `client`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client` (
   `client_id` bigint NOT NULL AUTO_INCREMENT COMMENT 'PK',
-  `client_info_id` bigint DEFAULT NULL COMMENT 'FK client_info.id。客戶個資',
   `customer_number` varchar(20) DEFAULT NULL COMMENT '客戶編號10碼',
   `email` varchar(255) NOT NULL COMMENT '客戶的Email，登入帳號',
   `password` varchar(2000) DEFAULT '' COMMENT '客戶密碼',
@@ -56,7 +55,7 @@ CREATE TABLE `client` (
   UNIQUE KEY `reset_password_verification_code_email_UNIQUE` (`reset_password_verification_code_email`),
   UNIQUE KEY `registration_progress_verification_code_UNIQUE` (`registration_progress_verification_code`),
   UNIQUE KEY `registration_verification_code_UNIQUE` (`registration_verification_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +64,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (35,NULL,NULL,'q2381050@gmail.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,'43d02467-97d6-4b9a-8684-ea654804c6be','2024-03-20 03:04:37','4f3ffac5-7a16-4da4-ae0f-73bb3f5b6951','2024-03-20 03:03:56',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-19 03:02:42','2024-03-19 03:04:37');
+INSERT INTO `client` VALUES (36,NULL,'q2381050@gamil.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,NULL,NULL,'77f153ae-1467-48bb-9630-a06efc119058','2024-03-28 03:01:50',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-27 03:01:50','2024-03-27 03:35:23');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,13 +82,13 @@ CREATE TABLE `client_info` (
   `client_address` varchar(45) DEFAULT NULL COMMENT '地址',
   `phone_numbe` varchar(45) DEFAULT NULL COMMENT '手機',
   `create_user` varchar(45) DEFAULT NULL,
-  `updete_user` varchar(45) DEFAULT NULL,
+  `update_user` varchar(45) DEFAULT NULL,
   `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`client_info_id`),
   KEY `client_id_idx` (`client_id`),
   CONSTRAINT `client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-26 18:34:34
+-- Dump completed on 2024-03-27 13:12:01
