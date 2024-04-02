@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin_account`
+--
+
+DROP TABLE IF EXISTS `admin_account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin_account` (
+  `admin_account_id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id\n',
+  `account` varchar(255) DEFAULT NULL COMMENT 'admin帳號',
+  `password` varchar(255) DEFAULT NULL COMMENT '登入密碼',
+  `role` varchar(45) DEFAULT NULL COMMENT '角色',
+  `create_user` varchar(45) DEFAULT NULL,
+  `update_user` varchar(45) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`admin_account_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='後台管理帳號';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_account`
+--
+
+LOCK TABLES `admin_account` WRITE;
+/*!40000 ALTER TABLE `admin_account` DISABLE KEYS */;
+INSERT INTO `admin_account` VALUES (1,'BusinessAssistant','1234','BusinessAssistant','System','System','2024-04-02 09:14:15','2024-04-02 09:14:15');
+/*!40000 ALTER TABLE `admin_account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `client`
 --
 
@@ -55,7 +85,7 @@ CREATE TABLE `client` (
   UNIQUE KEY `reset_password_verification_code_email_UNIQUE` (`reset_password_verification_code_email`),
   UNIQUE KEY `registration_progress_verification_code_UNIQUE` (`registration_progress_verification_code`),
   UNIQUE KEY `registration_verification_code_UNIQUE` (`registration_verification_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +94,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (36,NULL,'q2381050@gamil.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,NULL,NULL,'77f153ae-1467-48bb-9630-a06efc119058','2024-03-28 03:01:50',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-27 03:01:50','2024-03-27 03:35:23');
+INSERT INTO `client` VALUES (37,NULL,'q2381050@gamil.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,NULL,NULL,'91fc4af6-9fdc-4999-b420-d9499643282d','2024-03-28 05:43:06',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-27 05:43:06','2024-03-27 05:43:06');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +118,7 @@ CREATE TABLE `client_info` (
   PRIMARY KEY (`client_info_id`),
   KEY `client_id_idx` (`client_id`),
   CONSTRAINT `client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +127,7 @@ CREATE TABLE `client_info` (
 
 LOCK TABLES `client_info` WRITE;
 /*!40000 ALTER TABLE `client_info` DISABLE KEYS */;
+INSERT INTO `client_info` VALUES (5,NULL,'A12345678','GGYY馬的馬的','0912345678','system','system','2024-03-27 06:01:17','2024-03-27 06:01:17');
 /*!40000 ALTER TABLE `client_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-27 13:12:01
+-- Dump completed on 2024-04-02 17:32:45
