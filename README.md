@@ -5,7 +5,7 @@ Java Learning Display
 自主練習展示
 此專案目標是將自己有興趣的東西以模組化的方式撰寫出來。
 並盡可能的去研究多人合作開發的話要怎麼讓工作更順利。
-Version : 0.3.0
+Version : 0.4.0
 last updated date : 2024/03/12
 
 
@@ -15,7 +15,7 @@ last updated date : 2024/03/12
 3. 追加前端頁面（pending)
 
 功能列表:
-1. 客戶帳號註冊系統、客戶帳號審核系統，專案名稱:RegAuthSystem  ( in progress 以實現功能:帳號註冊、查詢註冊進度)
+1. 客戶帳號註冊系統、客戶帳號審核系統，專案名稱:RegAuthSystem  ( in progress 進度:審核系統)
 2. JWT登入系統，且使用Redies紀錄Token(Pending)
 3. 產品訂價管理系統(Pending)
 
