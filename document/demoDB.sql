@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: demo
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin_account`
+--
+
+DROP TABLE IF EXISTS `admin_account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin_account` (
+  `admin_account_id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id\n',
+  `account` varchar(255) DEFAULT NULL COMMENT 'admin帳號',
+  `password` varchar(255) DEFAULT NULL COMMENT '登入密碼',
+  `role` varchar(45) DEFAULT NULL COMMENT '角色',
+  `create_user` varchar(45) DEFAULT NULL,
+  `update_user` varchar(45) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`admin_account_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='後台管理帳號';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_account`
+--
+
+LOCK TABLES `admin_account` WRITE;
+/*!40000 ALTER TABLE `admin_account` DISABLE KEYS */;
+INSERT INTO `admin_account` VALUES (1,'BusinessAssistant','1234','BusinessAssistant','System','System','2024-04-02 09:14:15','2024-04-02 09:14:15');
+/*!40000 ALTER TABLE `admin_account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `client`
 --
 
@@ -24,7 +54,6 @@ DROP TABLE IF EXISTS `client`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client` (
   `client_id` bigint NOT NULL AUTO_INCREMENT COMMENT 'PK',
-  `client_info_id` bigint DEFAULT NULL COMMENT 'FK client_info.id。客戶個資',
   `customer_number` varchar(20) DEFAULT NULL COMMENT '客戶編號10碼',
   `email` varchar(255) NOT NULL COMMENT '客戶的Email，登入帳號',
   `password` varchar(2000) DEFAULT '' COMMENT '客戶密碼',
@@ -43,7 +72,7 @@ CREATE TABLE `client` (
   `login_success_date` timestamp NULL DEFAULT NULL COMMENT '最後成功登入時間',
   `login_fail_count` int DEFAULT NULL COMMENT '登入失敗次數記錄',
   `is_lock` bit(1) DEFAULT b'0' COMMENT '帳號是否因為登入失敗次數過多被鎖起來\n預設0:FALSE 沒有被鎖、1:TRUE 有被鎖\n',
-  `is_locked_time` varchar(45) DEFAULT NULL COMMENT '被帳號鎖住的時間',
+  `is_locked_time` timestamp NULL DEFAULT NULL COMMENT '被帳號鎖住的時間',
   `register_review_id` bigint DEFAULT NULL COMMENT '註冊審核紀錄表\n',
   `create_user` varchar(45) NOT NULL DEFAULT 'system',
   `update_user` varchar(45) NOT NULL DEFAULT 'system',
@@ -53,8 +82,10 @@ CREATE TABLE `client` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `client_number_UNIQUE` (`customer_number`),
   UNIQUE KEY `set_password_verification_code_email_UNIQUE` (`set_password_verification_code_email`),
-  UNIQUE KEY `reset_password_verification_code_email_UNIQUE` (`reset_password_verification_code_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `reset_password_verification_code_email_UNIQUE` (`reset_password_verification_code_email`),
+  UNIQUE KEY `registration_progress_verification_code_UNIQUE` (`registration_progress_verification_code`),
+  UNIQUE KEY `registration_verification_code_UNIQUE` (`registration_verification_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,8 +94,41 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (28,NULL,NULL,'q2381050@gmail.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,NULL,NULL,'b633b02c-e53f-44a0-9c14-7daaf0ade195','2024-03-19 17:03:59',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-18 17:04:01','2024-03-18 17:04:01');
+INSERT INTO `client` VALUES (37,NULL,'q2381050@gamil.com','',NULL,NULL,NULL,NULL,_binary '',NULL,NULL,5,NULL,NULL,'91fc4af6-9fdc-4999-b420-d9499643282d','2024-03-28 05:43:06',NULL,0,_binary '\0',NULL,NULL,'system','system','2024-03-27 05:43:06','2024-03-27 05:43:06');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `client_info`
+--
+
+DROP TABLE IF EXISTS `client_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `client_info` (
+  `client_info_id` bigint NOT NULL AUTO_INCREMENT,
+  `client_id` bigint DEFAULT NULL,
+  `Identification_number` varchar(45) DEFAULT NULL COMMENT '身分證字號',
+  `client_address` varchar(45) DEFAULT NULL COMMENT '地址',
+  `phone_numbe` varchar(45) DEFAULT NULL COMMENT '手機',
+  `create_user` varchar(45) DEFAULT NULL,
+  `update_user` varchar(45) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`client_info_id`),
+  KEY `client_id_idx` (`client_id`),
+  CONSTRAINT `client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client_info`
+--
+
+LOCK TABLES `client_info` WRITE;
+/*!40000 ALTER TABLE `client_info` DISABLE KEYS */;
+INSERT INTO `client_info` VALUES (5,NULL,'A12345678','GGYY馬的馬的','0912345678','system','system','2024-03-27 06:01:17','2024-03-27 06:01:17');
+/*!40000 ALTER TABLE `client_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -84,7 +148,7 @@ CREATE TABLE `email_template` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`email_template_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='存放寄信用的信件範本';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='存放寄信用的信件範本';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +157,7 @@ CREATE TABLE `email_template` (
 
 LOCK TABLES `email_template` WRITE;
 /*!40000 ALTER TABLE `email_template` DISABLE KEYS */;
-INSERT INTO `email_template` VALUES (1,'register_user','使用者註冊信件','您好，\r\n \r\n 此電子郵件已由是蔡岳翰的測試系統自動發送，用於進入註冊頁面填寫基本資料。\r\n 請使用下方的連結填寫你的基本資料。\r\n   \r\n   {{URL-Register}}\r\n   \r\n Greeting,\r\n This email has been automatically sent by Chief Telecom and is used to enter the registration page to fill in the basic information.\r\n Please use the link below to fill in your basic information.\r\n \r\n   {{URL-Register}}','system','system','2024-03-14 12:57:09','2024-03-14 12:57:09');
+INSERT INTO `email_template` VALUES (1,'register_user','使用者註冊信件','您好，\r\n \r\n	此電子郵件已由是蔡岳翰的測試系統自動發送，用於進入註冊頁面填寫基本資料。\r\n	請使用下方的連結填寫你的基本資料。\r\n   \r\n	{{register_user}}\r\n   \r\nGreeting,\r\n	This email has been automatically sent by Cai Yuehan\'s test system and is used to enter the registration page and fill in basic information.\r\n	Please use the link below to fill in your basic information.\r\n \r\n	{{register_user}}','system','system','2024-03-14 12:57:09','2024-03-14 12:57:09'),(2,'registration_progress','進度查詢的驗證碼','您好，\r\n \r\n	此電子郵件已由是蔡岳翰的測試系統自動發送，\r\n	您申請查詢註冊進度，請使用下方的連結查看進度。\r\n   \r\n	{{registration_progress}}\r\n   \r\nGreeting,\r\n	This email has been automatically sent by Cai Yuehan\'s test system.\r\n	You have applied to check the registration progress, please use the link below to check the progress.\r\n \r\n	{{registration_progress}}','system','system','2024-03-19 02:27:16','2024-03-19 02:27:16');
 /*!40000 ALTER TABLE `email_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +210,7 @@ CREATE TABLE `system_parameter_setting` (
   `create_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`setting_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系統參數設定';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系統參數設定';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +219,7 @@ CREATE TABLE `system_parameter_setting` (
 
 LOCK TABLES `system_parameter_setting` WRITE;
 /*!40000 ALTER TABLE `system_parameter_setting` DISABLE KEYS */;
-INSERT INTO `system_parameter_setting` VALUES (1,'email','email_expiration_time','86400','信件的有效期間','system','system','2024-03-14 08:12:52','2024-03-14 08:12:52'),(2,'email','email_sender','Shirai <shiraiforwork@gmail.com>','信件的寄信者','system','system','2024-03-14 13:31:18','2024-03-14 13:31:18'),(3,'email','email_type_register_user','http://127.0.0.1:8080/user/register/','註冊信件裡面附上的 URL，使用會被導向填入個資的頁面','system','system','2024-03-14 14:53:26','2024-03-14 14:53:26');
+INSERT INTO `system_parameter_setting` VALUES (1,'email','email_expiration_time','86400','信件的有效期間','system','system','2024-03-14 08:12:52','2024-03-14 08:12:52'),(2,'email','email_sender','Shirai <shiraiforwork@gmail.com>','信件的寄信者','system','system','2024-03-14 13:31:18','2024-03-14 13:31:18'),(3,'email','email_type_register_user','http://127.0.0.1:8080/user/register/','註冊信件裡面附上的 URL，使用會被導向填入個資的頁面','system','system','2024-03-14 14:53:26','2024-03-14 14:53:26'),(4,'email','email_type_registration_progress','http://127.0.0.1:8080/user/register/check-progress/','註冊進度查詢信件裡面附上的 URL，使用會被導向到進度查詢的頁面','system','system','2024-03-19 02:32:49','2024-03-19 02:32:49');
 /*!40000 ALTER TABLE `system_parameter_setting` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-19  8:47:22
+-- Dump completed on 2024-04-02 17:32:45
